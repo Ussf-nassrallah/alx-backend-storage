@@ -1,4 +1,4 @@
--- under 80 (strict) and no last_meeting or more than 1 month.
+-- No table for a meeting
 DROP VIEW IF EXISTS need_meeting;
 CREATE VIEW need_meeting AS
 SELECT name
