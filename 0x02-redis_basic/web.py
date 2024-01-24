@@ -15,8 +15,8 @@ def data_cacher(method: Callable) -> Callable:
     @wraps(method)
     def fn(url) -> str:
         ''' fn: function thats caching output '''
-        store.incr('count:{}'.format(url))
-        output = store.get('result:{}'.format(url))
+        store.incr(f'count:{url}')
+        output = store.get(f'result:{url}')
 
         if output:
             return output.decode('utf-8')
