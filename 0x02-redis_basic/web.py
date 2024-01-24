@@ -16,14 +16,13 @@ def data_cacher(method: Callable) -> Callable:
     def fn(url) -> str:
         ''' fn: function thats caching output '''
         store.incr(f'count:{url}')
-        output = store.get(f'result:{url}')
+        output = store.get(f'cached:{url}')
 
         if output:
             return output.decode('utf-8')
 
         output = method(url)
-        store.set(f'count:{url}', 0)
-        store.setex(f'result:{url}', 10, output)
+        store.setex(f'cached:{url}', 10, output)
         return output
 
     return fn
